@@ -61,7 +61,7 @@ export function InputScreen({
           className="mt-2 text-[#475569]"
           style={{ fontSize: 15, lineHeight: 1.6 }}
         >
-          Paste a transcript — or record the conversation live — and Quill will turn it into a structured, ready-to-share record.
+          Paste a transcript — or record the conversation live — and Karyo-Quill will turn it into a structured, ready-to-share record.
         </p>
       </div>
 
@@ -167,7 +167,7 @@ export function InputScreen({
       </div>
 
       <p className="mt-6 text-[12px] text-[#94A3B8]">
-        Quill drafts; you review and approve. Suggestions are never auto-applied.
+        Karyo-Quill drafts; you review and approve. Suggestions are never auto-applied.
       </p>
     </main>
   );

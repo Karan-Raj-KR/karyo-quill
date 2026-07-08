@@ -13,7 +13,7 @@ export function TopBar() {
             className="font-semibold tracking-tight text-[#0F172A]"
             style={{ fontSize: 20, letterSpacing: "-0.02em" }}
           >
-            Quill
+            Karyo-Quill
           </span>
           <span
             aria-hidden

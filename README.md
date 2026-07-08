@@ -1,16 +1,16 @@
-# Quill: Universal AI Scribe 🪶
+# Karyo-Quill: Universal AI Scribe 🪶
 
-**Quill** is a web-first application designed to transform raw conversation transcripts into structured, actionable records. It acts as an intelligent AI scribe for professionals across various industries, saving time and preventing critical documentation errors.
+**Karyo-Quill** is a web-first application designed to transform raw conversation transcripts into structured, actionable records. It acts as an intelligent AI scribe for professionals across various industries, saving time and preventing critical documentation errors.
 
-**[Live Demo](https://frontend-theta-six-9b54d8ggbk.vercel.app)** 
+**[Live Demo](https://karyo-quill.vercel.app)** 
 
-## 🚀 What is Quill?
+## 🚀 What is Karyo-Quill?
 
-Quill is a modern, web-based AI assistant. Instead of relying on manual note-taking during or after a conversation, Quill takes a raw, unstructured transcript of a conversation and automatically synthesizes it into a highly structured, formatted document. It is built as a single-page application (SPA) that prioritizes speed, clarity, and an exceptional user experience.
+Karyo-Quill is a modern, web-based AI assistant. Instead of relying on manual note-taking during or after a conversation, Karyo-Quill takes a raw, unstructured transcript of a conversation and automatically synthesizes it into a highly structured, formatted document. It is built as a single-page application (SPA) that prioritizes speed, clarity, and an exceptional user experience.
 
 ## ✨ What Can It Do?
 
-Quill is versatile and operates across **four distinct modes**, each tailored to a specific professional workflow:
+Karyo-Quill is versatile and operates across **four distinct modes**, each tailored to a specific professional workflow:
 
 *   🏥 **Clinical Mode (Default):** Designed for healthcare. It takes a doctor-patient transcript and generates a formal clinical note, suggests relevant ICD-10 medical billing codes, and prepares a ready-to-print prescription.
 *   🤝 **Sales Mode:** Designed for account executives and sales reps. It analyzes a discovery call and produces a comprehensive recap, along with a polished, draftable follow-up email that can be copied in a single click.
@@ -22,14 +22,14 @@ Quill is versatile and operates across **four distinct modes**, each tailored to
 Professionals across all industries suffer from the same operational bottleneck: **administrative overhead and manual data entry.**
 After a 30-minute meeting, professionals often spend another 15 minutes formatting notes, drafting emails, or filling out electronic health records (EHR). 
 
-Furthermore, human error leads to **critical omissions**. A doctor might forget to document a patient's allergy history, or a sales rep might end a call without clarifying the client's budget. Quill solves this by instantly doing the heavy lifting of documentation while acting as a safeguard that actively scans for missing, critical information.
+Furthermore, human error leads to **critical omissions**. A doctor might forget to document a patient's allergy history, or a sales rep might end a call without clarifying the client's budget. Karyo-Quill solves this by instantly doing the heavy lifting of documentation while acting as a safeguard that actively scans for missing, critical information.
 
 ## 🔍 Key Features & The "Gap Check"
 
-The defining feature of Quill is its intelligent **Gap-Check system**. Instead of just summarizing text, Quill evaluates what is *missing* or *risky* in a conversation. The Gap-Check card visually dominates the user interface to ensure critical flags are never missed.
+The defining feature of Karyo-Quill is its intelligent **Gap-Check system**. Instead of just summarizing text, Karyo-Quill evaluates what is *missing* or *risky* in a conversation. The Gap-Check card visually dominates the user interface to ensure critical flags are never missed.
 
 *   🛑 **Red Flags (Critical Risks):** In clinical mode, if the AI detects that a drug interaction or allergy history was NOT discussed, it highlights this as a severe risk with a red accent.
-*   ⚠️ **Amber Flags (Missing Information):** In sales or interview modes, if a key metric like "budget" or "salary expectations" is missing from the transcript, Quill surfaces an amber warning so the user knows what to follow up on.
+*   ⚠️ **Amber Flags (Missing Information):** In sales or interview modes, if a key metric like "budget" or "salary expectations" is missing from the transcript, Karyo-Quill surfaces an amber warning so the user knows what to follow up on.
 
 **Other features include:**
 *   **Staggered Card Reveals:** A sleek UI animation where information cards slide in sequentially, providing a premium feel.
@@ -37,7 +37,7 @@ The defining feature of Quill is its intelligent **Gap-Check system**. Instead o
 
 ## 🛠️ The Technical Solution
 
-Quill achieves this through a modern, decoupled architecture:
+Karyo-Quill achieves this through a modern, decoupled architecture:
 
 ### Frontend (React SPA)
 A responsive two-screen React application (Input Screen & Result Screen) styled with Tailwind CSS. It uses a refined design system (inter font, specific color palettes like teal accents and slate text) to present the data beautifully. 
@@ -50,7 +50,7 @@ The solution's magic lies in its strict LLM instructions. The AI is forced to re
 
 ## 💻 Local Development Setup
 
-To run Quill locally, you'll need both the frontend and backend running.
+To run Karyo-Quill locally, you'll need both the frontend and backend running.
 
 ### 1. Backend Setup
 
