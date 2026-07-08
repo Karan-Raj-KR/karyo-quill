@@ -247,3 +247,65 @@ body {
   .quill-print-screen-actions { display: none !important; }
   @page { margin: 18mm 16mm; }
 }
+
+/* ----------------------------------------------------------- */
+/* App Shell Layout & Sidebar */
+/* ----------------------------------------------------------- */
+
+.quill-app-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.quill-app-header {
+  height: 60px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  background: var(--quill-card);
+  border-bottom: 1px solid var(--quill-border);
+  z-index: 20;
+}
+
+.quill-app-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.quill-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  background: var(--quill-bg);
+  border-right: 1px solid var(--quill-border);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 16px;
+  overflow-y: auto;
+}
+
+.quill-main {
+  flex: 1;
+  overflow-y: auto;
+  padding: 32px;
+  background: var(--quill-bg);
+}
+
+.quill-sidebar-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 4px;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.quill-sidebar-item:hover {
+  background: var(--quill-card);
+}

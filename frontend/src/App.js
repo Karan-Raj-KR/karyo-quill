@@ -6,6 +6,7 @@ import { TopBar } from "./components/TopBar";
 import { InputScreen } from "./components/InputScreen";
 import { ResultScreen } from "./components/ResultScreen";
 import { PrintView } from "./components/PrintView";
+import { Sidebar } from "./components/Sidebar";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
 const API = `${BACKEND_URL}/api`;
@@ -112,35 +113,41 @@ function App() {
   }, [result, approved, mode]);
 
   return (
-    <div data-testid="quill-app" className="quill-app min-h-screen bg-[#F7F8FA]">
+    <div data-testid="quill-app" className="quill-app quill-app-shell">
       {screen !== SCREENS.PRINT && <TopBar />}
-
-      {screen === SCREENS.INPUT && (
-        <InputScreen
-          mode={mode}
-          setMode={setMode}
-          transcript={transcript}
-          setTranscript={setTranscript}
-          onGenerate={handleGenerate}
-          loading={loading}
-          apiBase={API}
-          micEnabled={micEnabled}
-        />
-      )}
-
-      {screen === SCREENS.RESULT && result && (
-        <ResultScreen
-          transcript={transcript}
-          result={result}
-          approved={approved}
-          setApproved={setApproved}
-          onExport={handleExport}
-          onNew={handleNew}
-        />
-      )}
-
-      {screen === SCREENS.PRINT && result && (
+      
+      {screen === SCREENS.PRINT ? (
         <PrintView result={result} onExit={() => setScreen(SCREENS.RESULT)} />
+      ) : (
+        <div className="quill-app-body">
+          <Sidebar onNew={handleNew} />
+          
+          <div className="quill-main">
+            {screen === SCREENS.INPUT && (
+              <InputScreen
+                mode={mode}
+                setMode={setMode}
+                transcript={transcript}
+                setTranscript={setTranscript}
+                onGenerate={handleGenerate}
+                loading={loading}
+                apiBase={API}
+                micEnabled={micEnabled}
+              />
+            )}
+      
+            {screen === SCREENS.RESULT && result && (
+              <ResultScreen
+                transcript={transcript}
+                result={result}
+                approved={approved}
+                setApproved={setApproved}
+                onExport={handleExport}
+                onNew={handleNew}
+              />
+            )}
+          </div>
+        </div>
       )}
 
       <Toaster
