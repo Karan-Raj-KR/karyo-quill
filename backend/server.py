@@ -91,62 +91,6 @@ QUILL_SEEDS = {
         ],
         "exportLabel": "Print prescription",
     },
-    "sales": {
-        "documentTitle": "Sales Call Recap — CRM Replacement",
-        "sections": [
-            {"heading": "Needs", "content": "Current CRM is clunky; rep adoption is low. Team frustrated with logging calls."},
-            {"heading": "Budget", "content": "Not discussed on this call."},
-            {"heading": "Timeline", "content": "Not explicitly defined. Implied near-term given two prior failed tools."},
-            {"heading": "Stakeholders", "content": "Primary contact + VP of Sales. Two-person decision unit."},
-            {"heading": "Summary", "content": "20-rep team seeking a CRM their reps will actually use. Two previous tools failed adoption. Prospect open to next step."},
-        ],
-        "suggestions": [
-            {"label": "Follow-up email draft", "detail": "Hi [Name], thanks for the call today. To recap: you're looking for a CRM your 20 reps will actually adopt, after two prior tools fell short. I'll send over a short overview tailored to high-adoption rollouts. Would Thursday or Friday work for a 30-min demo with you and your VP of Sales? Best, [Rep]"},
-            {"label": "Recommended next step", "detail": "Book a 30-minute tailored demo within the next 7 days; bring an adoption-focused success story."},
-        ],
-        "flags": [
-            "Budget not confirmed",
-            "No concrete next step agreed on the call",
-        ],
-        "exportLabel": "Copy follow-up email",
-    },
-    "interview": {
-        "documentTitle": "Interview Scorecard — Backend Engineer",
-        "sections": [
-            {"heading": "Experience", "content": "3 years as backend engineer. Python + Postgres. Led team of 4 on a payments service."},
-            {"heading": "Key skills", "content": "Concurrency debugging (resolved race condition causing double charges via lock redesign). Team leadership at small scale."},
-            {"heading": "Culture fit", "content": "Prefers high autonomy with heavy code review. Aligns with engineering-led teams."},
-            {"heading": "Overall", "content": "Strong technical depth and demonstrated impact. Communication clear and structured."},
-        ],
-        "suggestions": [
-            {"label": "Recommendation", "detail": "Advance to next round — system design + values interview."},
-            {"label": "Gaps to cover next round", "detail": "Probe scaling beyond a 4-person team, on-call ownership, and mentorship style."},
-        ],
-        "flags": [
-            "Salary expectations not discussed",
-            "Notice period / availability not asked",
-        ],
-        "exportLabel": "Export scorecard",
-    },
-    "intake": {
-        "documentTitle": "Client Intake Brief — New Cafe Launch",
-        "sections": [
-            {"heading": "Goals", "content": "Establish online presence and start receiving orders for a new cafe."},
-            {"heading": "Deliverables", "content": "Zomato + Swiggy onboarding, social presence, brand collateral beyond logo."},
-            {"heading": "Budget", "content": "Not defined on this call."},
-            {"heading": "Timeline", "content": "Opening in 3 weeks — tight launch window."},
-            {"heading": "Scope", "content": "Logo exists; brand colors and full identity TBD. No delivery platform listings yet."},
-        ],
-        "suggestions": [
-            {"label": "Proposal points", "detail": "1) Zomato + Swiggy listings within week 1. 2) Brand color + identity sprint, week 1–2. 3) Instagram launch plan, week 2. 4) Soft-launch campaign, week 3."},
-            {"label": "Recommended package", "detail": "Launch Sprint — 3-week fixed scope; aligned to opening date."},
-        ],
-        "flags": [
-            "Budget undefined",
-            "Success metric undefined",
-        ],
-        "exportLabel": "Export brief",
-    },
 }
 
 
@@ -157,27 +101,14 @@ MODE_RULES = {
         "exportLabel": "Print prescription",
         "required_sections": ["Subjective", "Objective", "Assessment", "Plan", "ICD-10 Codes"],
     },
-    "sales": {
-        "exportLabel": "Copy follow-up email",
-        "required_sections": ["Needs", "Budget", "Timeline", "Stakeholders", "Summary"],
-    },
-    "interview": {
-        "exportLabel": "Export scorecard",
-        "required_sections": ["Experience", "Key skills", "Culture fit", "Overall"],
-    },
-    "intake": {
-        "exportLabel": "Export brief",
-        "required_sections": ["Goals", "Deliverables", "Budget", "Timeline", "Scope"],
-    },
 }
 
 
 # --- LLM system prompt ---
 
-QUILL_SYSTEM_PROMPT = """You are a documentation assistant for the selected profession. \
-Convert the transcript into a structured DRAFT for a human to review and approve. \
-You suggest; you never decide. Adapt the output to the mode. \
-Return ONLY valid JSON in the schema — no prose, no markdown.
+QUILL_SYSTEM_PROMPT = """You are a clinical documentation assistant for medical doctors. \
+Convert the doctor-patient conversation transcript into a structured clinical note DRAFT for a doctor to review and approve. \
+You suggest; you never decide. Return ONLY valid JSON in the schema — no prose, no markdown.
 
 JSON schema (EXACT keys, no extras):
 {
@@ -188,35 +119,13 @@ JSON schema (EXACT keys, no extras):
   "exportLabel": "string"
 }
 
-Per-mode hard rules:
-
-- mode = "clinical":
-    sections MUST be exactly these headings, in order: "Subjective", "Objective", "Assessment", "Plan", "ICD-10 Codes".
-    The "ICD-10 Codes" section MUST contain at least one valid ICD-10 code formatted like "J02.9 — Acute pharyngitis, unspecified" (semicolon-separate multiple codes).
-    suggestions are medications: label = drug name; detail = dose + frequency + instructions (e.g. "500 mg PO TID for 10 days. Take with food.").
-    flags MUST call out, where applicable: missing vital signs (e.g. blood pressure), unasked allergy history, and any drug interaction risks based on the transcript.
-    exportLabel MUST be exactly "Print prescription".
-
-- mode = "sales":
-    sections MUST be exactly: "Needs", "Budget", "Timeline", "Stakeholders", "Summary".
-    suggestions MUST include one with label "Follow-up email draft" (detail = a complete, sendable email body) and one with label "Recommended next step".
-    flags MUST call out: missing budget, missing/ambiguous next step, or any other notable gap.
-    exportLabel MUST be exactly "Copy follow-up email".
-
-- mode = "interview":
-    sections MUST be exactly: "Experience", "Key skills", "Culture fit", "Overall".
-    suggestions MUST include a hire/next-round recommendation and gaps to cover next round.
-    flags MUST call out: missing salary expectations, missing notice period / availability, or any other notable gap.
-    exportLabel MUST be exactly "Export scorecard".
-
-- mode = "intake":
-    sections MUST be exactly: "Goals", "Deliverables", "Budget", "Timeline", "Scope".
-    suggestions MUST include proposal points and a recommended package.
-    flags MUST call out: undefined budget, undefined success metric, or any other notable gap.
-    exportLabel MUST be exactly "Export brief".
-
-General rules:
-- documentTitle is a short, scannable title (e.g. "Sales Call Recap — CRM Replacement").
+Clinical Mode Hard Rules:
+- sections MUST be exactly these headings, in order: "Subjective", "Objective", "Assessment", "Plan", "ICD-10 Codes".
+- The "ICD-10 Codes" section MUST contain at least one valid ICD-10 code formatted like "J02.9 — Acute pharyngitis, unspecified" (semicolon-separate multiple codes).
+- suggestions are medications: label = drug name; detail = dose + frequency + instructions (e.g. "500 mg PO TID for 10 days. Take with food.").
+- flags MUST call out, where applicable: missing vital signs (e.g. blood pressure), unasked allergy history, and any drug interaction risks based on the transcript.
+- exportLabel MUST be exactly "Print prescription".
+- documentTitle is a short, scannable title (e.g. "Clinical Note — Acute Pharyngitis").
 - Keep section content concise (1–4 sentences) but specific to what was said.
 - If something was not discussed, say so explicitly (e.g. "Not discussed on this call.") AND add a flag.
 - Output ONLY the JSON object. No code fences, no preamble, no trailing commentary."""
@@ -355,7 +264,7 @@ async def _call_llm(transcript: str, mode: str) -> Optional[dict]:
 class GenerateRequest(BaseModel):
     model_config = ConfigDict(extra="ignore")
     transcript: str
-    mode: Literal["clinical", "sales", "interview", "intake"]
+    mode: Literal["clinical"]
 
 
 class SectionModel(BaseModel):

@@ -1,7 +1,7 @@
 import React from "react";
 import { Plus } from "lucide-react";
 
-const MOCK_SESSIONS = [
+export const MOCK_SESSIONS = [
   { id: 1, initials: "JS", date: "Oct 12", status: "amber" },
   { id: 2, initials: "AM", date: "Oct 12", status: "red" },
   { id: 3, initials: "RC", date: "Oct 11", status: "green" },
@@ -23,7 +23,7 @@ const StatusDot = ({ status }) => {
   );
 };
 
-export function Sidebar({ onNew }) {
+export function Sidebar({ onNew, onSelectSession }) {
   return (
     <aside className="quill-sidebar">
       <button 
@@ -40,7 +40,11 @@ export function Sidebar({ onNew }) {
         </h3>
         <ul className="space-y-1">
           {MOCK_SESSIONS.map((session) => (
-            <li key={session.id} className="quill-sidebar-item">
+            <li 
+              key={session.id} 
+              onClick={() => onSelectSession && onSelectSession(session.id)}
+              className="quill-sidebar-item"
+            >
               <div className="flex items-center gap-3">
                 <div className="w-7 h-7 rounded-full bg-[var(--quill-border)] flex items-center justify-center text-[11px] font-medium text-[var(--quill-ink)]">
                   {session.initials}
