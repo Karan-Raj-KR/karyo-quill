@@ -1,29 +1,36 @@
-/* Quill — Phase 1 styles
-   Calm, premium, document-feeling. No legacy hospital portal vibes. */
+/* Karyo-Quill — Redesigned clinical dark mode
+   Deep navy/slate with a confident accent. Proper hierarchy and depth. */
 
 :root {
-  --quill-bg: #f7f8fa;
-  --quill-card: #ffffff;
-  --quill-ink: #0f172a;
-  --quill-body: #475569;
-  --quill-muted: #94a3b8;
-  --quill-teal: #0d9488;
-  --quill-teal-soft: rgba(13, 148, 136, 0.1);
+  --quill-bg: #0f172a;       /* slate-900 */
+  --quill-card: #1e293b;     /* slate-800 */
+  --quill-ink: #f8fafc;      /* slate-50 */
+  --quill-body: #94a3b8;     /* slate-400 */
+  --quill-muted: #64748b;    /* slate-500 */
+  --quill-accent: #0ea5e9;   /* sky-500 */
+  --quill-accent-hover: #0284c7; /* sky-600 */
+  --quill-accent-soft: rgba(14, 165, 233, 0.15);
   --quill-amber: #f59e0b;
-  --quill-red: #dc2626;
-  --quill-border: #e2e8f0;
+  --quill-red: #ef4444;      /* red-500 */
+  --quill-border: #334155;   /* slate-700 */
+  --quill-border-focus: #475569; /* slate-600 */
+}
+
+body {
+  background-color: var(--quill-bg);
+  color: var(--quill-ink);
 }
 
 .quill-app {
-  font-family:
-    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: var(--quill-ink);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-feature-settings:
-    "cv11" 1,
-    "ss01" 1,
-    "ss03" 1;
+  font-feature-settings: "cv11" 1, "ss01" 1, "ss03" 1;
+}
+
+.font-display {
+  font-family: "Outfit", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .quill-app textarea,
@@ -32,40 +39,47 @@
   font-family: inherit;
 }
 
-/* Card shadow per design system */
-.quill-card-shadow {
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+/* Custom Selection */
+.quill-app ::selection {
+  background: var(--quill-accent-soft);
+  color: var(--quill-ink);
 }
 
-/* Primary teal button */
+.quill-app *:focus-visible {
+  outline: none;
+}
+
+/* Card & Surface treatments with depth */
+.quill-card {
+  background: var(--quill-card);
+  border: 1px solid var(--quill-border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+}
+
+/* Primary Generate Button (Redesigned) */
 .quill-primary {
-  background-color: var(--quill-teal) !important;
+  background-color: var(--quill-accent) !important;
   color: #ffffff !important;
-  box-shadow:
-    0 1px 0 rgba(13, 148, 136, 0.08),
-    0 1px 3px rgba(15, 23, 42, 0.06);
-  transition:
-    transform 160ms ease,
-    background-color 160ms ease,
-    box-shadow 160ms ease,
-    opacity 160ms ease;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .quill-primary:hover:not(:disabled) {
-  background-color: #0b8079 !important;
+  background-color: var(--quill-accent-hover) !important;
   transform: translateY(-1px);
-  box-shadow:
-    0 4px 12px rgba(13, 148, 136, 0.18),
-    0 1px 3px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 .quill-primary:active:not(:disabled) {
-  transform: scale(0.98);
+  transform: translateY(1px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 .quill-primary:disabled {
-  background-color: #cbd5e1 !important;
-  color: #ffffff !important;
+  background-color: var(--quill-border) !important;
+  color: var(--quill-muted) !important;
   cursor: not-allowed;
   box-shadow: none;
   transform: none;
+  border-color: transparent !important;
 }
 
 /* Loading spinner */
@@ -74,14 +88,12 @@
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.45);
+  border: 2px solid rgba(255, 255, 255, 0.3);
   border-top-color: #ffffff;
   animation: quill-spin 700ms linear infinite;
 }
 @keyframes quill-spin {
-  to {
-    transform: rotate(360deg);
-  }
+  to { transform: rotate(360deg); }
 }
 
 /* Staggered card reveal */
@@ -97,21 +109,9 @@
   }
 }
 
-/* Custom text selection */
-.quill-app ::selection {
-  background: rgba(13, 148, 136, 0.18);
-  color: var(--quill-ink);
-}
-
-/* Focus ring polish */
-.quill-app *:focus-visible {
-  outline: none;
-}
-
 /* ----------------------------------------------------------- */
-/* Mic recorder (Phase 3)                                      */
+/* Mic recorder */
 /* ----------------------------------------------------------- */
-
 .quill-mic-wrap {
   position: absolute;
   top: 12px;
@@ -121,7 +121,6 @@
   align-items: center;
   gap: 8px;
 }
-
 .quill-mic-btn {
   width: 38px;
   height: 38px;
@@ -129,22 +128,18 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  color: #475569;
+  background: var(--quill-card);
+  border: 1px solid var(--quill-border);
+  color: var(--quill-body);
   cursor: pointer;
-  transition:
-    background-color 160ms ease,
-    border-color 160ms ease,
-    color 160ms ease,
-    transform 100ms ease,
-    box-shadow 160ms ease;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition: all 160ms ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   padding: 0;
 }
 .quill-mic-btn:hover:not(:disabled) {
-  color: #0d9488;
-  border-color: #0d9488;
+  color: var(--quill-accent);
+  border-color: var(--quill-border-focus);
+  background: var(--quill-border);
 }
 .quill-mic-btn:active:not(:disabled) {
   transform: scale(0.94);
@@ -153,233 +148,102 @@
   cursor: not-allowed;
   opacity: 0.65;
 }
-
 .quill-mic-btn-recording {
-  background: #dc2626 !important;
-  border-color: #dc2626 !important;
+  background: var(--quill-red) !important;
+  border-color: var(--quill-red) !important;
   color: #ffffff !important;
   animation: quill-mic-pulse 1.6s ease-in-out infinite;
 }
 .quill-mic-btn-recording:hover {
-  background: #b91c1c !important;
-  border-color: #b91c1c !important;
+  background: #dc2626 !important; /* slightly darker red */
 }
-
 .quill-mic-btn-transcribing {
-  color: #0d9488;
-  border-color: #0d9488;
-  background: rgba(13, 148, 136, 0.05);
+  color: var(--quill-accent);
+  border-color: var(--quill-accent);
+  background: var(--quill-accent-soft);
 }
-
 @keyframes quill-mic-pulse {
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.45);
-  }
-  50% {
-    box-shadow: 0 0 0 10px rgba(220, 38, 38, 0);
-  }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.45); }
+  50% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
 }
-
-.quill-mic-icon {
-  width: 16px;
-  height: 16px;
-}
-.quill-mic-icon-spin {
-  animation: quill-spin 700ms linear infinite;
-}
+.quill-mic-icon { width: 16px; height: 16px; }
+.quill-mic-icon-spin { animation: quill-spin 700ms linear infinite; }
 
 .quill-mic-timer {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: #ffffff;
-  border: 1px solid #fecaca;
-  color: #0f172a;
+  background: var(--quill-card);
+  border: 1px solid var(--quill-border);
+  color: var(--quill-ink);
   padding: 4px 10px;
   border-radius: 999px;
   font-size: 12px;
   font-variant-numeric: tabular-nums;
   font-weight: 600;
-  letter-spacing: 0.01em;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 .quill-mic-pulse-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #dc2626;
+  background: var(--quill-red);
   animation: quill-blink 1s ease-in-out infinite;
 }
 @keyframes quill-blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.35;
-  }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
 }
-
 .quill-mic-warn {
   display: inline-flex;
   align-items: center;
   background: rgba(245, 158, 11, 0.14);
-  color: #b45309;
+  color: var(--quill-amber);
   padding: 4px 10px;
   border-radius: 999px;
   font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.01em;
   border: 1px solid rgba(245, 158, 11, 0.25);
 }
 
 @media (max-width: 480px) {
-  .quill-mic-wrap {
-    top: 8px;
-    right: 8px;
-    gap: 6px;
-  }
-  .quill-mic-btn {
-    width: 36px;
-    height: 36px;
-  }
+  .quill-mic-wrap { top: 8px; right: 8px; gap: 6px; }
+  .quill-mic-btn { width: 36px; height: 36px; }
 }
 
 /* ----------------------------------------------------------- */
-/* Print view (Clinical prescription)                          */
+/* Print view */
 /* ----------------------------------------------------------- */
-
 .quill-print-root {
   background: #ffffff;
   min-height: 100vh;
   color: #000000;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    sans-serif;
 }
-
 .quill-print-page {
   max-width: 760px;
   margin: 0 auto;
   padding: 48px 56px 64px;
   background: #ffffff;
 }
+.quill-print-header { border-bottom: 1px solid #000000; padding-bottom: 16px; margin-bottom: 24px; }
+.quill-print-header h1 { font-size: 24px; font-weight: 700; margin: 0 0 4px; letter-spacing: -0.01em; }
+.quill-print-meta { font-size: 13px; margin: 0; }
+.quill-print-section { margin-bottom: 24px; font-size: 14px; line-height: 1.6; }
+.quill-print-section h2 { font-size: 16px; font-weight: 700; margin: 0 0 12px; text-transform: uppercase; letter-spacing: 0.08em; }
+.quill-print-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.quill-print-table th, .quill-print-table td { text-align: left; border-bottom: 1px solid #000000; padding: 10px 8px; vertical-align: top; }
+.quill-print-table th { font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-size: 11px; }
+.quill-print-table th:first-child, .quill-print-table td:first-child { padding-left: 0; }
+.quill-print-signature { margin-top: 64px; font-size: 14px; }
+.quill-print-footer { margin-top: 56px; padding-top: 12px; border-top: 1px solid #000000; font-size: 11px; font-style: italic; }
+.quill-print-screen-actions { margin-top: 40px; display: flex; gap: 12px; justify-content: center; }
+.quill-print-screen-btn { background: #0f172a; color: #ffffff; border: 0; border-radius: 10px; padding: 10px 18px; font-size: 14px; font-weight: 600; cursor: pointer; }
+.quill-print-screen-btn-secondary { background: transparent; color: #475569; border: 1px solid #e2e8f0; border-radius: 10px; padding: 10px 18px; font-size: 14px; font-weight: 500; cursor: pointer; }
 
-.quill-print-header {
-  border-bottom: 1px solid #000000;
-  padding-bottom: 16px;
-  margin-bottom: 24px;
-}
-.quill-print-header h1 {
-  font-size: 24px;
-  font-weight: 700;
-  margin: 0 0 4px;
-  letter-spacing: -0.01em;
-}
-.quill-print-meta {
-  font-size: 13px;
-  margin: 0;
-}
-
-.quill-print-section {
-  margin-bottom: 24px;
-  font-size: 14px;
-  line-height: 1.6;
-}
-.quill-print-section h2 {
-  font-size: 16px;
-  font-weight: 700;
-  margin: 0 0 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.quill-print-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 13px;
-}
-.quill-print-table th,
-.quill-print-table td {
-  text-align: left;
-  border-bottom: 1px solid #000000;
-  padding: 10px 8px;
-  vertical-align: top;
-}
-.quill-print-table th {
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-size: 11px;
-}
-.quill-print-table th:first-child,
-.quill-print-table td:first-child {
-  padding-left: 0;
-}
-
-.quill-print-signature {
-  margin-top: 64px;
-  font-size: 14px;
-}
-
-.quill-print-footer {
-  margin-top: 56px;
-  padding-top: 12px;
-  border-top: 1px solid #000000;
-  font-size: 11px;
-  font-style: italic;
-}
-
-.quill-print-screen-actions {
-  margin-top: 40px;
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-}
-.quill-print-screen-btn {
-  background: #0f172a;
-  color: #ffffff;
-  border: 0;
-  border-radius: 10px;
-  padding: 10px 18px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-}
-.quill-print-screen-btn-secondary {
-  background: transparent;
-  color: #475569;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  padding: 10px 18px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-}
-
-/* Print stylesheet: hide app chrome, only print view shows */
 @media print {
-  body {
-    background: #ffffff !important;
-  }
-  .no-print,
-  [data-testid="top-bar"],
-  [data-testid="result-screen"],
-  [data-testid="input-screen"],
-  #emergent-badge {
-    display: none !important;
-  }
-  .quill-print-root {
-    background: #ffffff !important;
-  }
-  .quill-print-page {
-    padding: 24px 32px;
-    max-width: 100%;
-  }
-  .quill-print-screen-actions {
-    display: none !important;
-  }
-  @page {
-    margin: 18mm 16mm;
-  }
+  body { background: #ffffff !important; }
+  .no-print, [data-testid="top-bar"], [data-testid="result-screen"], [data-testid="input-screen"] { display: none !important; }
+  .quill-print-root, .quill-print-page { background: #ffffff !important; padding: 24px 32px; max-width: 100%; }
+  .quill-print-screen-actions { display: none !important; }
+  @page { margin: 18mm 16mm; }
 }
