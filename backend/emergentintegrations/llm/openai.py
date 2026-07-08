@@ -1,0 +1,2 @@
+class OpenAISpeechToText:
+    pass
