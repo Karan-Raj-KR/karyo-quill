@@ -2,11 +2,11 @@ import React from "react";
 import { Plus } from "lucide-react";
 
 export const MOCK_SESSIONS = [
-  { id: 1, initials: "JS", date: "Oct 12", status: "amber" },
-  { id: 2, initials: "AM", date: "Oct 12", status: "red" },
-  { id: 3, initials: "RC", date: "Oct 11", status: "green" },
-  { id: 4, initials: "KL", date: "Oct 10", status: "green" },
-  { id: 5, initials: "TB", date: "Oct 09", status: "amber" },
+  { id: 1, initials: "JS", date: "Jul 08", status: "amber" },
+  { id: 2, initials: "AM", date: "Jul 08", status: "red" },
+  { id: 3, initials: "RC", date: "Jul 07", status: "green" },
+  { id: 4, initials: "KL", date: "Jul 06", status: "green" },
+  { id: 5, initials: "TB", date: "Jul 05", status: "amber" },
 ];
 
 const StatusDot = ({ status }) => {
